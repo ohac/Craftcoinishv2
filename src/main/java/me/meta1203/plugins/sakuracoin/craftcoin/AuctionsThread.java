@@ -1,4 +1,4 @@
-package me.meta1203.plugins.craftcoin.craftcoin;
+package me.meta1203.plugins.sakuracoin.sakuracoin;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -19,9 +19,9 @@ import com.google.litecoin.core.*;
 import com.google.litecoin.core.TransactionConfidence.ConfidenceType;
 import com.google.litecoin.store.BlockStoreException;
 
-import me.meta1203.plugins.craftcoin.AuctionEntry;
-import me.meta1203.plugins.craftcoin.Craftcoinish;
-import me.meta1203.plugins.craftcoin.Util;
+import me.meta1203.plugins.sakuracoin.AuctionEntry;
+import me.meta1203.plugins.sakuracoin.Sakuracoinish;
+import me.meta1203.plugins.sakuracoin.Util;
 
 public class AuctionsThread extends Thread {
 	private List<Transaction> toCheck = new ArrayList<Transaction>();
@@ -51,9 +51,9 @@ public class AuctionsThread extends Thread {
 
 	private void checkauctions() {
 		synchronized (this) {
-			Craftcoinish.log.info("Checking 2"); 
+			Sakuracoinish.log.info("Checking 2"); 
 			String returns = "";
-				Craftcoinish p = (Craftcoinish)Bukkit.getPluginManager().getPlugin("Craftcoinish");
+				Sakuracoinish p = (Sakuracoinish)Bukkit.getPluginManager().getPlugin("Sakuracoinish");
 
 			returns = "Items Found:";
 			List<AuctionEntry> ae = p.getDatabase().find(AuctionEntry.class).where().isNotNull("id").findList();
@@ -61,7 +61,7 @@ public class AuctionsThread extends Thread {
 			for (AuctionEntry x : ae) {
 				int xx = (int) (System.currentTimeMillis()/100 - x.getStarted());
 			
-				if(xx < 86400*Craftcoinish.auction_days)
+				if(xx < 86400*Sakuracoinish.auction_days)
 				{
 					try
 					{

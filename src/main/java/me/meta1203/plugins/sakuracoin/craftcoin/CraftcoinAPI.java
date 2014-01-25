@@ -1,4 +1,4 @@
-package me.meta1203.plugins.craftcoin.craftcoin;
+package me.meta1203.plugins.sakuracoin.sakuracoin;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,9 +12,9 @@ import com.google.litecoin.core.*;
 import com.google.litecoin.store.BlockStoreException;
 import com.google.litecoin.store.SPVBlockStore;
 
-import me.meta1203.plugins.craftcoin.Craftcoinish;
+import me.meta1203.plugins.sakuracoin.Sakuracoinish;
 
-public class CraftcoinAPI {
+public class SakuracoinAPI {
 
 	private Wallet localWallet;
     private SPVBlockStore localBlock;
@@ -23,23 +23,23 @@ public class CraftcoinAPI {
     private PeerGroup localPeerGroup = null;
     public final BigInteger minBitFee = BigInteger.valueOf((long)(0.0005*Math.pow(10, 8)));
 	
-	public CraftcoinAPI() {
-		walletFile = new File("plugins/Craftcoinish/wallet.wallet");
+	public SakuracoinAPI() {
+		walletFile = new File("plugins/Sakuracoinish/wallet.wallet");
 		try {
 		    localWallet = Wallet.loadFromFile(walletFile);
 		    // Satoshis.log.info(localWallet.toString());
 		} catch (IOException e) {
-            localWallet = new Wallet(Craftcoinish.network);
+            localWallet = new Wallet(Sakuracoinish.network);
 		}
 		try {
-            localBlock = new SPVBlockStore(Craftcoinish.network, new File("plugins/Craftcoinish/h2.blockchain"));
-            localChain = new BlockChain(Craftcoinish.network, localWallet, localBlock);
+            localBlock = new SPVBlockStore(Sakuracoinish.network, new File("plugins/Sakuracoinish/h2.blockchain"));
+            localChain = new BlockChain(Sakuracoinish.network, localWallet, localBlock);
 		} catch (BlockStoreException ex) {
 			ex.printStackTrace();
 		}
         localWallet.addEventListener(new CoinListener());
-        localPeerGroup = new PeerGroup(Craftcoinish.network, localChain);
-        localPeerGroup.setUserAgent("CraftcoinBukkit", "0.2");
+        localPeerGroup = new PeerGroup(Sakuracoinish.network, localChain);
+        localPeerGroup.setUserAgent("SakuracoinBukkit", "0.2");
         localPeerGroup.addWallet(localWallet);
         try {
 			localPeerGroup.addAddress(new PeerAddress(InetAddress.getByName("smp1.spendlitecoins.com"), 12124));
@@ -76,16 +76,16 @@ public class CraftcoinAPI {
 	public Address genAddress() {
 		ECKey key = new ECKey();
 		localWallet.addKey(key);
-		return key.toAddress(Craftcoinish.network);
+		return key.toAddress(Sakuracoinish.network);
 	}
 
 	@Override
 	protected void finalize() throws Throwable {
-        localWallet.saveToFile(new File("plugins/Craftcoinish/wallet.wallet"));
+        localWallet.saveToFile(new File("plugins/Sakuracoinish/wallet.wallet"));
 	}
 	
 	public boolean localSendCoins(Address a, double value) {
-        BigInteger sendAmount = Craftcoinish.econ.inGameToBitcoin(value);
+        BigInteger sendAmount = Sakuracoinish.econ.inGameToBitcoin(value);
         
         Wallet.SendRequest request = Wallet.SendRequest.to(a, sendAmount);
         request.fee = minBitFee;
@@ -109,19 +109,19 @@ public class CraftcoinAPI {
 		{
 			
 		}
-			Craftcoinish.log.warning("Sent transaction: " + request.tx.getHash());
+			Sakuracoinish.log.warning("Sent transaction: " + request.tx.getHash());
 			saveWallet();
 			return true;
 
 	}
 	
 	public boolean sendCoinsMulti(Map<Address, Double> toSend) {
-		Transaction tx = new Transaction(Craftcoinish.network);
+		Transaction tx = new Transaction(Sakuracoinish.network);
 		double totalSend = 0.0;
 		
 		for (Entry<Address, Double> current : toSend.entrySet()) {
-			totalSend += current.getValue() / Craftcoinish.mult;
-			tx.addOutput(Craftcoinish.econ.inGameToBitcoin(current.getValue()), current.getKey());
+			totalSend += current.getValue() / Sakuracoinish.mult;
+			tx.addOutput(Sakuracoinish.econ.inGameToBitcoin(current.getValue()), current.getKey());
 		}
 		
 		if (totalSend < 0.01) {
@@ -164,7 +164,7 @@ public class CraftcoinAPI {
     public void reloadWallet() {
     	localPeerGroup.stop();
     	localWallet.clearTransactions(0);
-    	new File("plugins/Craftcoinish/spv.blockchain").delete();
+    	new File("plugins/Sakuracoinish/spv.blockchain").delete();
     	localPeerGroup.start();
     	localPeerGroup.downloadBlockChain();
     }

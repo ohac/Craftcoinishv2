@@ -1,10 +1,10 @@
-package me.meta1203.plugins.craftcoin.craftcoin;
+package me.meta1203.plugins.sakuracoin.sakuracoin;
 
 import java.math.BigInteger;
 import java.util.List;
 
-import me.meta1203.plugins.craftcoin.Craftcoinish;
-import me.meta1203.plugins.craftcoin.Util;
+import me.meta1203.plugins.sakuracoin.Sakuracoinish;
+import me.meta1203.plugins.sakuracoin.Util;
 
 import com.google.litecoin.core.*;
 import com.google.litecoin.core.TransactionConfidence.ConfidenceType;
@@ -19,11 +19,11 @@ public class CoinListener extends AbstractWalletEventListener {
 			BigInteger prevBalance, BigInteger newBalance) {
 		
 		
-		BigInteger CRCAdded = newBalance.subtract(prevBalance); 
-		BigInteger CRCAddedc = BigInteger.ZERO;
-		if(CRCAdded.compareTo(CRCAddedc) != -1)
+		BigInteger SKRAdded = newBalance.subtract(prevBalance); 
+		BigInteger SKRAddedc = BigInteger.ZERO;
+		if(SKRAdded.compareTo(SKRAddedc) != -1)
 		{
-				Craftcoinish.checker.addCheckTransaction(tx);
+				Sakuracoinish.checker.addCheckTransaction(tx);
 		}
 		
 		

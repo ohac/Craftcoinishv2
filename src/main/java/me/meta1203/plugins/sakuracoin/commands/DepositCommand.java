@@ -1,7 +1,7 @@
-package me.meta1203.plugins.craftcoin.commands;
+package me.meta1203.plugins.sakuracoin.commands;
 
-import me.meta1203.plugins.craftcoin.Util;
-import static me.meta1203.plugins.craftcoin.commands.CommandUtil.*;
+import me.meta1203.plugins.sakuracoin.Util;
+import static me.meta1203.plugins.sakuracoin.commands.CommandUtil.*;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,7 +15,7 @@ public class DepositCommand implements CommandExecutor {
 
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2,
 			String[] arg3) {
-		if (!arg0.hasPermission("craftcoin.deposit")) {
+		if (!arg0.hasPermission("sakuracoin.deposit")) {
 			error("You do not have permission for this command!", arg0);
 			return true;
 		}

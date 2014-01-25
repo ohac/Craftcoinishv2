@@ -1,6 +1,6 @@
-package me.meta1203.plugins.craftcoin.database;
+package me.meta1203.plugins.sakuracoin.database;
 
-import me.meta1203.plugins.craftcoin.Craftcoinish;
+import me.meta1203.plugins.sakuracoin.Sakuracoinish;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -34,11 +34,11 @@ public class SystemCheckThread extends Thread {
 	}
 	
 	public void test(boolean loaded) {
-		String msg = Craftcoinish.scanner.getInfo();
+		String msg = Sakuracoinish.scanner.getInfo();
 		if (loaded) {
 			broadcastToPerms(msg, "satoshis.info");
 		}
-		Craftcoinish.log.warning(msg);
+		Sakuracoinish.log.warning(msg);
 	}
 	
 	public void broadcastToPerms(String msg, String perm) {

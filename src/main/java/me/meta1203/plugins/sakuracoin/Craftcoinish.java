@@ -1,4 +1,4 @@
-package me.meta1203.plugins.craftcoin;
+package me.meta1203.plugins.sakuracoin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,12 +6,12 @@ import java.util.logging.Logger;
 
 import javax.persistence.PersistenceException;
 
-import me.meta1203.plugins.craftcoin.commands.*;
-import me.meta1203.plugins.craftcoin.craftcoin.AuctionsThread;
-import me.meta1203.plugins.craftcoin.craftcoin.CheckThread;
-import me.meta1203.plugins.craftcoin.craftcoin.CraftcoinAPI;
-import me.meta1203.plugins.craftcoin.database.DatabaseScanner;
-import me.meta1203.plugins.craftcoin.database.SystemCheckThread;
+import me.meta1203.plugins.sakuracoin.commands.*;
+import me.meta1203.plugins.sakuracoin.sakuracoin.AuctionsThread;
+import me.meta1203.plugins.sakuracoin.sakuracoin.CheckThread;
+import me.meta1203.plugins.sakuracoin.sakuracoin.SakuracoinAPI;
+import me.meta1203.plugins.sakuracoin.database.DatabaseScanner;
+import me.meta1203.plugins.sakuracoin.database.SystemCheckThread;
 
 
 import org.bukkit.Bukkit;
@@ -39,7 +39,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.block.SignChangeEvent;
 import com.google.litecoin.core.NetworkParameters;
 import org.bukkit.inventory.ItemStack;
-public class Craftcoinish extends JavaPlugin implements Listener {
+public class Sakuracoinish extends JavaPlugin implements Listener {
 	// Plugin
 	public static int auction_days = 2;
 	public static String owner = "";
@@ -50,7 +50,7 @@ public class Craftcoinish extends JavaPlugin implements Listener {
 	public static double mult = 0;
 	public static int confirms = 2;
 	public static double minWithdraw = 0;
-	public static CraftcoinAPI bapi = null;
+	public static SakuracoinAPI bapi = null;
 	public static CheckThread checker = null;
 	public static Logger log = null;
 	public static SatoshisEconAPI econ = null;
@@ -71,26 +71,26 @@ public class Craftcoinish extends JavaPlugin implements Listener {
     	FileConfiguration config = getConfig();
     	config.options().copyDefaults(true);
     	saveConfig();
-    	owner = config.getString("craftcoinish.owner");
-    	currencyName = config.getString("craftcoinish.currency-name");
-    	tax = config.getDouble("craftcoinish.tax");
+    	owner = config.getString("sakuracoinish.owner");
+    	currencyName = config.getString("sakuracoinish.currency-name");
+    	tax = config.getDouble("sakuracoinish.tax");
     	
-    	buyerorseller = config.getBoolean("craftcoinish.is-buyer-responsible");
-    	salesTax = config.getBoolean("craftcoinish.sales-tax");
-    	minWithdraw = config.getDouble("craftcoin.min-withdraw");
-    	mult = config.getDouble("craftcoinish.multiplier");
+    	buyerorseller = config.getBoolean("sakuracoinish.is-buyer-responsible");
+    	salesTax = config.getBoolean("sakuracoinish.sales-tax");
+    	minWithdraw = config.getDouble("sakuracoin.min-withdraw");
+    	mult = config.getDouble("sakuracoinish.multiplier");
     	network = NetworkParameters.prodNet();
-    	confirms = config.getInt("craftcoin.confirms");
+    	confirms = config.getInt("sakuracoin.confirms");
     	auction_days = config.getInt("auction.days");
     	// Config loading done!
     	log.info("Satoshis configuration loaded.");
     	auc = new Auctions();
-    	checker = new CheckThread(config.getInt("craftcoin.check-interval"), confirms);
+    	checker = new CheckThread(config.getInt("sakuracoin.check-interval"), confirms);
     	auctions_thread = new AuctionsThread();
     	syscheck = new SystemCheckThread(config.getInt("self-check.delay"), config.getBoolean("self-check.startup"));
     	econ = new SatoshisEconAPI();
     	econ.buyerorseller = buyerorseller;
-    	bapi = new CraftcoinAPI();
+    	bapi = new SakuracoinAPI();
     	scanner = new DatabaseScanner(this);
     	checker.start();
     	syscheck.start();
@@ -103,7 +103,7 @@ public class Craftcoinish extends JavaPlugin implements Listener {
         this.getCommand("transact").setExecutor(new SendCommand());
         this.getCommand("credit").setExecutor(new CreditCommand());
         this.getCommand("debit").setExecutor(new DebitCommand());
-        this.getCommand("craftcoin").setExecutor(new AdminCommand());
+        this.getCommand("sakuracoin").setExecutor(new AdminCommand());
         this.getCommand("auction").setExecutor(new AuctionsCommand());
         try {
             Metrics metrics = new Metrics(this);

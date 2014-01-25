@@ -1,6 +1,6 @@
-package me.meta1203.plugins.craftcoin.commands;
+package me.meta1203.plugins.sakuracoin.commands;
 
-import me.meta1203.plugins.craftcoin.Craftcoinish;
+import me.meta1203.plugins.sakuracoin.Sakuracoinish;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,13 +11,13 @@ import com.google.litecoin.core.Address;
 import com.google.litecoin.core.AddressFormatException;
 import com.google.litecoin.core.WrongNetworkException;
 
-import static me.meta1203.plugins.craftcoin.commands.CommandUtil.*;
+import static me.meta1203.plugins.sakuracoin.commands.CommandUtil.*;
 
 public class WithdrawCommand implements CommandExecutor {
 
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2,
 			String[] arg3) {
-		if (!arg0.hasPermission("craftcoin.withdraw")) {
+		if (!arg0.hasPermission("sakuracoin.withdraw")) {
 			error("You do not have permission for this command!", arg0);
 			return true;
 		}
@@ -29,22 +29,22 @@ public class WithdrawCommand implements CommandExecutor {
 			if (arg3.length == 2) {
 				try {
 				
-					Address withdrawTo = new Address(Craftcoinish.network, arg3[0]);
+					Address withdrawTo = new Address(Sakuracoinish.network, arg3[0]);
 					double withdraw = Double.parseDouble(arg3[1]);
-					if (!Craftcoinish.econ.hasMoney(player.getName(), Craftcoinish.minWithdraw)) {
-						error("Oops! You must have " + Craftcoinish.econ.formatValue(Craftcoinish.minWithdraw, true) + " to withdraw!", arg0);
+					if (!Sakuracoinish.econ.hasMoney(player.getName(), Sakuracoinish.minWithdraw)) {
+						error("Oops! You must have " + Sakuracoinish.econ.formatValue(Sakuracoinish.minWithdraw, true) + " to withdraw!", arg0);
 						return true;
 					}
 					
-					if (!Craftcoinish.econ.hasMoney(arg0.getName(), withdraw - Craftcoinish.econ.priceOfTax(withdraw) - 0.2)) {
+					if (!Sakuracoinish.econ.hasMoney(arg0.getName(), withdraw - Sakuracoinish.econ.priceOfTax(withdraw) - 0.2)) {
 						error("Oops! You cannot withdraw more money than you have!", arg0);
 						return true;
 					}
-					Craftcoinish.bapi.localSendCoins(withdrawTo, withdraw);
+					Sakuracoinish.bapi.localSendCoins(withdrawTo, withdraw);
 
 
 					
-					Craftcoinish.econ.subFunds(arg0.getName(), withdraw - 0.2);
+					Sakuracoinish.econ.subFunds(arg0.getName(), withdraw - 0.2);
 				} catch (WrongNetworkException e) {
 					error("Oops! That address was for the TestNet!", arg0);
 				} catch (AddressFormatException e) {

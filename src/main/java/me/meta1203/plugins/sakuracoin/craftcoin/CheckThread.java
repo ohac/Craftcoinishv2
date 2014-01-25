@@ -1,4 +1,4 @@
-package me.meta1203.plugins.craftcoin.craftcoin;
+package me.meta1203.plugins.sakuracoin.sakuracoin;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,8 +8,8 @@ import com.google.litecoin.core.*;
 import com.google.litecoin.core.TransactionConfidence.ConfidenceType;
 import com.google.litecoin.store.BlockStoreException;
 
-import me.meta1203.plugins.craftcoin.Craftcoinish;
-import me.meta1203.plugins.craftcoin.Util;
+import me.meta1203.plugins.sakuracoin.Sakuracoinish;
+import me.meta1203.plugins.sakuracoin.Util;
 
 public class CheckThread extends Thread {
 	private List<Transaction> toCheck = new ArrayList<Transaction>();
@@ -18,13 +18,13 @@ public class CheckThread extends Thread {
 	private int confirmations = 0;
 
 	public CheckThread(int wait, int confirmations) {
-		Craftcoinish.log.info("Checking for " + Integer.toString(confirmations) + " confirmations every " + Integer.toString(wait) + " seconds.");
+		Sakuracoinish.log.info("Checking for " + Integer.toString(confirmations) + " confirmations every " + Integer.toString(wait) + " seconds.");
 		waitTime = wait;
 		this.confirmations = confirmations;
 		List<Transaction> toAdd = Util.loadChecking();
-		Craftcoinish.log.info("Adding " + toAdd.size() + " old transactions to the check pool!");
+		Sakuracoinish.log.info("Adding " + toAdd.size() + " old transactions to the check pool!");
 		for (Transaction current : toAdd) {
-			Craftcoinish.log.info("Added: " + current.getHashAsString());
+			Sakuracoinish.log.info("Added: " + current.getHashAsString());
 			toCheck.add(current);
 		}
 	}
@@ -44,7 +44,7 @@ public class CheckThread extends Thread {
 
 	public synchronized void addCheckTransaction(Transaction tx) {
 		toCheck.add(tx);
-		Craftcoinish.log.warning("Added transaction " + tx.getHashAsString() + " to check pool!");
+		Sakuracoinish.log.warning("Added transaction " + tx.getHashAsString() + " to check pool!");
 	}
 
 	public synchronized void serialize() {
@@ -55,24 +55,24 @@ public class CheckThread extends Thread {
 
 	private void check() {
 		synchronized (this) {
-			Craftcoinish.log.info("Checking 1"); 
+			Sakuracoinish.log.info("Checking 1"); 
 			List<Transaction> toRemove = new ArrayList<Transaction>();
 			for (Transaction current : toCheck) {
 				
 				
-				Transaction currents = Craftcoinish.bapi.getWallet().getTransaction(current.getHash());
+				Transaction currents = Sakuracoinish.bapi.getWallet().getTransaction(current.getHash());
 			
 				if (!currents.getConfidence().getConfidenceType().equals(ConfidenceType.BUILDING)) {
-					Craftcoinish.log.info("Still building");
+					Sakuracoinish.log.info("Still building");
 					continue;
 				}
 				int conf = currents.getConfidence().getDepthInBlocks();
-				Craftcoinish.log.info(conf + " CONFIRMS");
+				Sakuracoinish.log.info(conf + " CONFIRMS");
 				if (conf >= confirmations) {
-						double value = Craftcoinish.econ.bitcoinToInGame(currents.getValueSentToMe(Craftcoinish.bapi.getWallet()));
+						double value = Sakuracoinish.econ.bitcoinToInGame(currents.getValueSentToMe(Sakuracoinish.bapi.getWallet()));
 						List<Address> receivers = null;
 						try {
-							Craftcoinish.log.info(currents.getOutputs().toString());
+							Sakuracoinish.log.info(currents.getOutputs().toString());
 							receivers = Util.getContainedAddress(currents.getOutputs());
 						
 						} catch (ScriptException e) {
@@ -82,11 +82,11 @@ public class CheckThread extends Thread {
 						
 						for (Address x : receivers) {
 							String pName = Util.searchAddress(x);
-							Craftcoinish.econ.addFunds(pName, value);
-							Craftcoinish.log.warning("Added " + Craftcoinish.econ.formatValue(value, true) + " to " + pName + "!");
+							Sakuracoinish.econ.addFunds(pName, value);
+							Sakuracoinish.log.warning("Added " + Sakuracoinish.econ.formatValue(value, true) + " to " + pName + "!");
 						}
 						
-						Craftcoinish.bapi.saveWallet();
+						Sakuracoinish.bapi.saveWallet();
 					toRemove.add(currents);
 				}
 			}

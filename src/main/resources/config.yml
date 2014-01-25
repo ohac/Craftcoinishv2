@@ -1,4 +1,4 @@
-craftcoinish:
+sakuracoinish:
   # Tax rate in percent
   tax: 5.0
   # Tax sales or withdrawals?
@@ -10,9 +10,9 @@ craftcoinish:
   # Value of single Bitcoin
   multiplier: 4.0
   # Name of the in-game currency
-  currency-name: 'CRC'
-craftcoin:
-  # How much in-game currency is require to withdraw to craftcoin.
+  currency-name: 'SKR'
+sakuracoin:
+  # How much in-game currency is require to withdraw to sakuracoin.
   min-withdraw: 0
   # Transaction Confirmations required for crediting player?
   confirms: 2
