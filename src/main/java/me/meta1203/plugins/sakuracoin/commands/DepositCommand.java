@@ -8,7 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.google.litecoin.core.Address;
+import com.google.sakuracoin.core.Address;
 
 
 public class DepositCommand implements CommandExecutor {

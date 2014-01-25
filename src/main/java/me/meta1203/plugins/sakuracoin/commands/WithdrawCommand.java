@@ -7,9 +7,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.google.litecoin.core.Address;
-import com.google.litecoin.core.AddressFormatException;
-import com.google.litecoin.core.WrongNetworkException;
+import com.google.sakuracoin.core.Address;
+import com.google.sakuracoin.core.AddressFormatException;
+import com.google.sakuracoin.core.WrongNetworkException;
 
 import static me.meta1203.plugins.sakuracoin.commands.CommandUtil.*;
 

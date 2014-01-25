@@ -15,9 +15,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import com.avaje.ebean.Ebean;
-import com.google.litecoin.core.*;
-import com.google.litecoin.core.TransactionConfidence.ConfidenceType;
-import com.google.litecoin.store.BlockStoreException;
+import com.google.sakuracoin.core.*;
+import com.google.sakuracoin.core.TransactionConfidence.ConfidenceType;
+import com.google.sakuracoin.store.BlockStoreException;
 
 import me.meta1203.plugins.sakuracoin.AuctionEntry;
 import me.meta1203.plugins.sakuracoin.Sakuracoinish;

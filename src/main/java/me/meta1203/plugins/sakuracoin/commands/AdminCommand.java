@@ -9,9 +9,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import com.google.litecoin.core.ScriptException;
-import com.google.litecoin.core.Transaction;
-import com.google.litecoin.core.Wallet;
+import com.google.sakuracoin.core.ScriptException;
+import com.google.sakuracoin.core.Transaction;
+import com.google.sakuracoin.core.Wallet;
 
 public class AdminCommand implements CommandExecutor {
 

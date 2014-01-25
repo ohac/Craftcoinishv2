@@ -14,13 +14,13 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
-import com.google.litecoin.core.Address;
-import com.google.litecoin.core.AddressFormatException;
-import com.google.litecoin.core.ScriptException;
-import com.google.litecoin.core.Sha256Hash;
-import com.google.litecoin.core.Transaction;
-import com.google.litecoin.core.TransactionOutput;
-import com.google.litecoin.core.WrongNetworkException;
+import com.google.sakuracoin.core.Address;
+import com.google.sakuracoin.core.AddressFormatException;
+import com.google.sakuracoin.core.ScriptException;
+import com.google.sakuracoin.core.Sha256Hash;
+import com.google.sakuracoin.core.Transaction;
+import com.google.sakuracoin.core.TransactionOutput;
+import com.google.sakuracoin.core.WrongNetworkException;
 
 public class Util {
 

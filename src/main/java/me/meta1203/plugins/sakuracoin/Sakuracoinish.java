@@ -37,7 +37,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.block.SignChangeEvent;
-import com.google.litecoin.core.NetworkParameters;
+import com.google.sakuracoin.core.NetworkParameters;
 import org.bukkit.inventory.ItemStack;
 public class Sakuracoinish extends JavaPlugin implements Listener {
 	// Plugin

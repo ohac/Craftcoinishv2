@@ -8,9 +8,9 @@ import java.net.UnknownHostException;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.google.litecoin.core.*;
-import com.google.litecoin.store.BlockStoreException;
-import com.google.litecoin.store.SPVBlockStore;
+import com.google.sakuracoin.core.*;
+import com.google.sakuracoin.store.BlockStoreException;
+import com.google.sakuracoin.store.SPVBlockStore;
 
 import me.meta1203.plugins.sakuracoin.Sakuracoinish;
 
