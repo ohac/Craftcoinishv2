@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import com.google.sakuracoin.core.*;
 import com.google.sakuracoin.store.BlockStoreException;
 import com.google.sakuracoin.store.SPVBlockStore;
+import com.google.sakuracoin.store.UnreadableWalletException;
 
 import me.meta1203.plugins.sakuracoin.Sakuracoinish;
 
@@ -28,7 +29,7 @@ public class SakuracoinAPI {
 		try {
 		    localWallet = Wallet.loadFromFile(walletFile);
 		    // Satoshis.log.info(localWallet.toString());
-		} catch (IOException e) {
+		} catch (UnreadableWalletException e) {
             localWallet = new Wallet(Sakuracoinish.network);
 		}
 		try {
@@ -52,8 +53,7 @@ public class SakuracoinAPI {
         try {
 			StoredBlock b = localBlock.get(new Sha256Hash("64a9141746cbbe06c7e1a4b7f2abb968ccdeba66cd67c1add1091b29db00578e"));
 			
-			
-			for (Transaction tx : localWallet.getTransactions(false, true)) {
+			for (Transaction tx : localWallet.getTransactions(false)) {
 				
 			}
 			System.out.println("Good TX's");
@@ -90,21 +90,24 @@ public class SakuracoinAPI {
         Wallet.SendRequest request = Wallet.SendRequest.to(a, sendAmount);
         request.fee = minBitFee;
         
-        if (!localWallet.completeTx(request))
-        	return false;
+try {
+        localWallet.completeTx(request);
+} catch (InsufficientMoneyException e) {
+return false;
+}
         localPeerGroup.broadcastTransaction(request.tx);
         try {
-		if (!localWallet.completeTx(request)) {
-			return false;
-		} else {
+			localWallet.completeTx(request);
 			localPeerGroup.broadcastTransaction(request.tx);
 			try {
 				localWallet.commitTx(request.tx);
 			} catch (VerificationException e) {
 				
 			}
-		}
         }
+catch (InsufficientMoneyException e) {
+return false;
+}
 		catch (IllegalArgumentException x)
 		{
 			
@@ -130,17 +133,18 @@ public class SakuracoinAPI {
 		
 		Wallet.SendRequest request = Wallet.SendRequest.forTx(tx);
 		
-		if (!localWallet.completeTx(request)) {
-			return false;
-		} else {
-			localPeerGroup.broadcastTransaction(request.tx);
-			try {
-				localWallet.commitTx(request.tx);
-			} catch (VerificationException e) {
-				e.printStackTrace();
-			}
-			return true;
+try {
+		localWallet.completeTx(request);
+} catch (InsufficientMoneyException e) {
+return false;
+}
+		localPeerGroup.broadcastTransaction(request.tx);
+		try {
+			localWallet.commitTx(request.tx);
+		} catch (VerificationException e) {
+			e.printStackTrace();
 		}
+		return true;
 	}
 	
 	

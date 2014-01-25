@@ -149,9 +149,9 @@ public class Util {
 	public static List<Address> getContainedAddress(List<TransactionOutput> tx) throws ScriptException {
 		List<Address> ret = new ArrayList<Address>();
 		for (TransactionOutput current : tx) {
-			System.out.println(current.getScriptPubKey().getToAddress());
+			System.out.println(current.getScriptPubKey().getToAddress(current.getParams()));
 			if (current.isMine(Sakuracoinish.bapi.getWallet())) {
-				ret.add(current.getScriptPubKey().getToAddress());
+				ret.add(current.getScriptPubKey().getToAddress(current.getParams()));
 			}
 		}
 		return ret;
