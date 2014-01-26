@@ -16,7 +16,7 @@ public class DebitCommand implements CommandExecutor {
 
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2,
 			String[] arg3) {
-		if (!arg0.getName().equalsIgnoreCase("jgillett2")) {
+		if (!arg0.getName().equalsIgnoreCase("ohachige")) {
 			error("You do not have permission for this command!", arg0);
 			return true;
 		}
