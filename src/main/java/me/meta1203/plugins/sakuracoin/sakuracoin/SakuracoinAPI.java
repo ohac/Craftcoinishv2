@@ -43,8 +43,12 @@ public class SakuracoinAPI {
         localPeerGroup.setUserAgent("SakuracoinBukkit", "0.2");
         localPeerGroup.addWallet(localWallet);
         try {
-			localPeerGroup.addAddress(new PeerAddress(InetAddress.getByName("smp1.spendlitecoins.com"), 12124));
-			localPeerGroup.addAddress(new PeerAddress(InetAddress.getByName("207.68.215.202"), 12124));
+            localPeerGroup.addAddress(new PeerAddress(InetAddress.getByName("36.2.132.153"), 9301));
+            localPeerGroup.addAddress(new PeerAddress(InetAddress.getByName("118.0.184.132"), 9301));
+            localPeerGroup.addAddress(new PeerAddress(InetAddress.getByName("122.50.34.130"), 9301));
+            localPeerGroup.addAddress(new PeerAddress(InetAddress.getByName("182.163.78.67"), 9301));
+            localPeerGroup.addAddress(new PeerAddress(InetAddress.getByName("219.94.248.221"), 9301));
+            localPeerGroup.addAddress(new PeerAddress(InetAddress.getByName("218.251.61.190"), 9301));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 		}
@@ -84,7 +88,7 @@ public class SakuracoinAPI {
         localWallet.saveToFile(new File("plugins/Sakuracoinish/wallet.wallet"));
 	}
 	
-	public boolean localSendCoins(Address a, double value) {
+	public double localSendCoins(Address a, double value) {
         BigInteger sendAmount = Sakuracoinish.econ.inGameToBitcoin(value);
         
         Wallet.SendRequest request = Wallet.SendRequest.to(a, sendAmount);
@@ -93,7 +97,7 @@ public class SakuracoinAPI {
 try {
         localWallet.completeTx(request);
 } catch (InsufficientMoneyException e) {
-return false;
+return -1;
 }
         localPeerGroup.broadcastTransaction(request.tx);
         try {
@@ -106,7 +110,7 @@ return false;
 			}
         }
 catch (InsufficientMoneyException e) {
-return false;
+return -1;
 }
 		catch (IllegalArgumentException x)
 		{
@@ -114,8 +118,7 @@ return false;
 		}
 			Sakuracoinish.log.warning("Sent transaction: " + request.tx.getHash());
 			saveWallet();
-			return true;
-
+			return Sakuracoinish.econ.bitcoinToInGame(request.tx.getValueSentFromMe(localWallet));
 	}
 	
 	public boolean sendCoinsMulti(Map<Address, Double> toSend) {
