@@ -36,7 +36,7 @@ public class CreditCommand implements CommandExecutor {
 			error("Amount must be a number!", arg0);
 			return true;
 		}
-		if (amount > 0) {
+		if (amount > 0 || amount < 0) {
 			Sakuracoinish.econ.addFunds(arg3[0], amount);
 			action("Sucessfully credited " + Sakuracoinish.econ.formatValue(amount, true) + " to " +
 					arg3[0] + "!", arg0);
