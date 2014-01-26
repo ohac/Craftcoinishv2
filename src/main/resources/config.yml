@@ -6,9 +6,9 @@ sakuracoinish:
   # Whether or not the buyer will pay the sales tax (only used if 'sales-tax' is enabled)
   is-buyer-responsible: true
   # Username of the owner (All taxes go to this player)
-  owner: meta1203
+  owner: owner_name
   # Value of single Bitcoin
-  multiplier: 4.0
+  multiplier: 1.0
   # Name of the in-game currency
   currency-name: 'SKR'
 sakuracoin:
@@ -25,5 +25,5 @@ self-check:
   startup: false
 auctions:
   #How many days you want the auction to last before finding winner.
-  days: 2
+  days: 1
   

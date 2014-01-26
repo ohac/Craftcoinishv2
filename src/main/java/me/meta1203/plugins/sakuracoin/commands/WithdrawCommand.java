@@ -24,6 +24,7 @@ public class WithdrawCommand implements CommandExecutor {
 		
 		if (arg0 instanceof Player) {
 			Player player = (Player)arg0;
+double value = 0;
 			
 			// Withdraw exact amount
 			if (arg3.length == 2) {
@@ -36,26 +37,28 @@ public class WithdrawCommand implements CommandExecutor {
 						return true;
 					}
 					
-					if (!Sakuracoinish.econ.hasMoney(arg0.getName(), withdraw - Sakuracoinish.econ.priceOfTax(withdraw) - 0.2)) {
+					if (!Sakuracoinish.econ.hasMoney(arg0.getName(), withdraw - Sakuracoinish.econ.priceOfTax(withdraw))) {
 						error("Oops! You cannot withdraw more money than you have!", arg0);
 						return true;
 					}
-					Sakuracoinish.bapi.localSendCoins(withdrawTo, withdraw);
+					value = Sakuracoinish.bapi.localSendCoins(withdrawTo, withdraw);
 
 
 					
-					Sakuracoinish.econ.subFunds(arg0.getName(), withdraw - 0.2);
+					Sakuracoinish.econ.subFunds(arg0.getName(), withdraw - Sakuracoinish.econ.priceOfTax(withdraw));
 				} catch (WrongNetworkException e) {
 					error("Oops! That address was for the TestNet!", arg0);
 				} catch (AddressFormatException e) {
 					error("Oops! Is that the correct address?", arg0);
 				} catch (NumberFormatException e) {
-					error("Syntax: /withdraw <address> [amount]", arg0);
+					error("Usage: /withdraw <address> [amount]", arg0);
 					error("Amount must be a number!",arg0);
 				}
+} else {
+error("Usage: /withdraw <address> <amount>", arg0);
+}
+info("Withdrew " + Double.toString(value) + " to " + arg3[0] + " .", arg0);
 			} 
-		}
-		
 		return true;
 	}
 }

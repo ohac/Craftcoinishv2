@@ -3,6 +3,7 @@ package me.meta1203.plugins.sakuracoin.commands;
 import me.meta1203.plugins.sakuracoin.Sakuracoinish;
 import me.meta1203.plugins.sakuracoin.Util;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -43,6 +44,7 @@ public class SendCommand implements CommandExecutor {
 			Sakuracoinish.econ.transact(player.getName(), arg3[0], amount);
 			action("Sucessfully sent " + Sakuracoinish.econ.formatValue(amount, true) + " to " +
 					arg3[0] + "!", arg0);
+Bukkit.getServer().broadcastMessage(arg0 + " sent " + Sakuracoinish.econ.formatValue(amount, true) + " to " + arg3[0] + "!");
 		} else {
 			error("Invalid amount to send!", arg0);
 		}
