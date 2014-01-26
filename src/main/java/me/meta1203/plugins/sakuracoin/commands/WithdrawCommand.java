@@ -57,7 +57,9 @@ double value = 0;
 } else {
 error("Usage: /withdraw <address> <amount>", arg0);
 }
+if (arg3.length > 0) {
 info("Withdrew " + Double.toString(value) + " to " + arg3[0] + " .", arg0);
+}
 			} 
 		return true;
 	}
