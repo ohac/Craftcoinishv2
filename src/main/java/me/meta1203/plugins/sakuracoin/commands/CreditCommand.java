@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender;
 import static me.meta1203.plugins.sakuracoin.commands.CommandUtil.*;
 
 /**
- * A command that lets admins assign orphaned BTC in the wallet to player accounts.
+ * A command that lets admins assign orphaned SKR in the wallet to player accounts.
  */
 public class CreditCommand implements CommandExecutor {
 

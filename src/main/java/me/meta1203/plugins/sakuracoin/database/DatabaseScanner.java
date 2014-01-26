@@ -52,16 +52,16 @@ public class DatabaseScanner {
 			break;
 		case SEVERE:
 			info += "SYSTEM SEVERELY OVERDRAWN!\n" +
-					"Over by " + getOffset(scanned) + " BTC!\n" +
+					"Over by " + getOffset(scanned) + " SKR!\n" +
 					"Total economy reset is recommended!";
 			break;
 		case UNDER:
-			info += "More Bitcoin than " + Sakuracoinish.currencyName + " exists!\n";
+			info += "More Sakuracoin than " + Sakuracoinish.currencyName + " exists!\n";
 			break;
 		case WARNING:
 			info += "System overdrawn!\n" +
-					"Over by " + getOffset(scanned) + " BTC.\n" +
-					"It is recommended to equalize funding by adding BTC directly.";
+					"Over by " + getOffset(scanned) + " SKR.\n" +
+					"It is recommended to equalize funding by adding SKR directly.";
 			break;
 		default:
 			break;
