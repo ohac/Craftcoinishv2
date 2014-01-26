@@ -25,7 +25,7 @@ public class DepositCommand implements CommandExecutor {
 			String name = player.getName();
 			Address alloc = Util.parseAddress(Util.loadAccount(name).getAddr());
 			info("Send Sakuracoin to the following address: ", arg0);
-			info("http://" + alloc.toString() + ".skr", arg0);
+			info("http://ohac.github.io/notmailto/?q=mailto%3A" + alloc.toString() + "%40sk.r", arg0);
 			info("This address is yours forever. \nAdd it to your address book if need-be.", arg0);
 		}
 		return true;
