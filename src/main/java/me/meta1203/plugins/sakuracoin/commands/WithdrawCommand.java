@@ -37,7 +37,7 @@ double value = 0;
 						return true;
 					}
 					
-					if (!Sakuracoinish.econ.hasMoney(arg0.getName(), withdraw - Sakuracoinish.econ.priceOfTax(withdraw))) {
+					if (!Sakuracoinish.econ.hasMoney(arg0.getName(), withdraw + Sakuracoinish.econ.priceOfTax(withdraw))) {
 						error("Oops! You cannot withdraw more money than you have!", arg0);
 						return true;
 					}
@@ -45,7 +45,7 @@ double value = 0;
 
 
 					
-					Sakuracoinish.econ.subFunds(arg0.getName(), withdraw - Sakuracoinish.econ.priceOfTax(withdraw));
+					Sakuracoinish.econ.subFunds(arg0.getName(), withdraw + Sakuracoinish.econ.priceOfTax(withdraw));
 				} catch (WrongNetworkException e) {
 					error("Oops! That address was for the TestNet!", arg0);
 				} catch (AddressFormatException e) {
