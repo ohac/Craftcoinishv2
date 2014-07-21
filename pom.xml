@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>me.meta1203.plugins.sakuracoinish</groupId>
 	<artifactId>Sakuracoinish</artifactId>
-	<version>1.1</version>
+	<version>1.2</version>
 	<name>Sakuracoinish</name>
 	<url>https://github.com/ohac</url>
 	<build>
